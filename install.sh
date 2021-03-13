@@ -1,0 +1,1 @@
+sudo apt-get update && sudo apt-get install nodejs npm redis && npm install && npm install -g pm2
