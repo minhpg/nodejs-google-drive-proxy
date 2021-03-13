@@ -57,7 +57,9 @@ module.exports = (req, res) => {
                 return video;
               }),
             });
-            redisClient.setex(req.params.id, 3600, result);
+            redisClient.select(1, () => {
+              redisClient.setex(req.params.id, 3600, result);
+            })
             res.statusCode = 200;
             res.setHeader("Content-Type", "application/json; charset=utf8");
             return res.end(result);
