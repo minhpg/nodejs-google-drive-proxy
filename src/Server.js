@@ -16,12 +16,12 @@ app.get("/robots.txt", (req, res) => {
 app.get(
   "/videoplayback",
   (req, res, next) => {
-    const referrer = req.headers.referrer;
-    if (!referrer) {
+    const referer = req.headers.referer;
+    if (!referer) {
       res.statusCode = 403;
       res.end()
     } else {
-      if (!referrer.includes(process.env.REFERRER)) {
+      if (!referer.includes(process.env.REFERER)) {
         res.statusCode = 403;
         res.end()
       } else {
