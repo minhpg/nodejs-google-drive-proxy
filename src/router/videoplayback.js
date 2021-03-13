@@ -7,17 +7,17 @@ const redis_client = require("../Redis");
 
 module.exports = (req, res) => {
   try{  if (!req.query.hash) throw new Error();
-    const referrer = req.headers.referrer
-    if (!referrer) {
-      res.statusCode = 403
-      res.end('??????')
-    }
-    else {
-      if (!referrer.includes(process.env.REFERRER)){
-        res.statusCode = 403
-        res.end('??????')
-      }
-    }
+    // const referrer = req.headers.referrer
+    // if (!referrer) {
+    //   res.statusCode = 403
+    //   res.end('??????')
+    // }
+    // else {
+    //   if (!referrer.includes(process.env.REFERRER)){
+    //     res.statusCode = 403
+    //     res.end('??????')
+    //   }
+    // }
 
     const upstream = JSON.parse(base64.decode(req.query.hash));
     delete req.query.hash;
