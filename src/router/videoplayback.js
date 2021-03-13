@@ -7,10 +7,16 @@ const redis_client = require("../Redis");
 
 module.exports = (req, res) => {
   try{  if (!req.query.hash) throw new Error();
-    const referer = req.headers.referrer
-    if (!referer.includes(process.env.REFERRER)){
+    const referrer = req.headers.referrer
+    if (!referrer) {
       res.status(403).send('??????')
     }
+    else {
+      if (!referrer.includes(process.env.REFERRER)){
+        res.status(403).send('??????')
+      }
+    }
+
     const upstream = JSON.parse(base64.decode(req.query.hash));
     delete req.query.hash;
     console.log(upstream);
