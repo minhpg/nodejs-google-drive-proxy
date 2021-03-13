@@ -9,11 +9,13 @@ module.exports = (req, res) => {
   try{  if (!req.query.hash) throw new Error();
     const referrer = req.headers.referrer
     if (!referrer) {
-      res.status(403).send('??????')
+      res.statusCode = 403
+      res.send('??????')
     }
     else {
       if (!referrer.includes(process.env.REFERRER)){
-        res.status(403).send('??????')
+        res.statusCode = 403
+        res.send('??????')
       }
     }
 
