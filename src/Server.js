@@ -21,7 +21,7 @@ app.get(
       res.statusCode = 403;
       res.end()
     } else {
-      if (!referer.includes(process.env.REFERER)) {
+      if (referrer == process.env.REFERER) {
         res.statusCode = 403;
         res.end()
       } else {
