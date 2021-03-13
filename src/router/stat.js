@@ -1,5 +1,6 @@
 const redisClient = require('../Redis')
 const handleError = require("../HandleError");
+
 module.exports = (req,res) => {
     return Status(req,res)
 }
