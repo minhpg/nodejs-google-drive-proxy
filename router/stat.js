@@ -1,5 +1,5 @@
 const redisClient = require('../Redis')
-
+const handleError = require("../HandleError");
 module.exports = (req,res) => {
     return Status(req,res)
 }
@@ -16,6 +16,6 @@ const Status = (req,res) => {
         })
     }
     catch(err){
-        throw err
+        handleError(err)
     }
 }

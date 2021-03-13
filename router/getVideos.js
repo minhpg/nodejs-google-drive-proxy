@@ -6,12 +6,12 @@ const createProxyVideo = require("../Proxy");
 const handleError = require("../HandleError");
 const redisClient = require("../Redis");
 
-var fs = require("fs");
+const fs = require("fs");
 
-function getProxy() {
-  var data = fs.readFileSync(process.env.PROXY_LIST, "utf8");
-  var obj = JSON.parse(data);
-  var proxy = obj[Math.floor(Math.random() * obj.length)];
+const getProxy = () => {
+  const data = fs.readFileSync(process.env.PROXY_LIST, "utf8");
+  const obj = JSON.parse(data);
+  const proxy = obj[Math.floor(Math.random() * obj.length)];
   return "http://" + proxy.auth + "@" + proxy.ip + ":" + proxy.port;
 }
 
