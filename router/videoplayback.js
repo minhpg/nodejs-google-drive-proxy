@@ -26,7 +26,7 @@ module.exports = (req, res) => {
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
         (req.connection.socket ? req.connection.socket.remoteAddress : null);
-    redis_client.select(2,(err,_) => {
+    redis_client.select(3,(err,_) => {
         if (err) {
             throw err
         }
@@ -50,7 +50,7 @@ module.exports = (req, res) => {
         .on('error', handleError)
         .pipe(res)
     res.on('close', () => {
-        redis_client.select(2,(err,_) => {
+        redis_client.select(3,(err,_) => {
             if (err) {
                 throw err
             }

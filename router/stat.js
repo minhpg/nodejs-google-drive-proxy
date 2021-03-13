@@ -6,7 +6,7 @@ module.exports = (req,res) => {
 
 const Status = (req,res) => {
     try {
-        redisClient.select(2,() => {
+        redisClient.select(3,() => {
             redisClient.keys('*', (err,data) => {
                 const count = data.length
                 console.log(data)
