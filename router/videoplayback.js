@@ -30,8 +30,9 @@ module.exports = (req, res) => {
         if (err) {
             throw err
         }
+        const time = new Date()
+        redis_client.set(ip.toString(),time)
         console.log("NEW REQUEST FROM " + ip)
-        redis_client.set(ip.toString(),upstream.fileid)
     })
     const playback = request({
         url: originVideo.url,
@@ -53,8 +54,8 @@ module.exports = (req, res) => {
             if (err) {
                 throw err
             }
-            console.log('REQUEST CLOSED '+ip)
             redis_client.del(ip.toString())
+            console.log('REQUEST CLOSED '+ip)
             playback.destroy()
         })
     })
