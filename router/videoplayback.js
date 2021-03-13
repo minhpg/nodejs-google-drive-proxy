@@ -1,9 +1,10 @@
 'use strict'
-
+const redisClient = require('../Redis')
 const qs = require('querystring')
 const base64 = require('base64url')
 const handleError = require('../HandleError')
 const request = require('request')
+const redis_client = require('../Redis')
 
 module.exports = (req, res) => {
 
@@ -21,12 +22,17 @@ module.exports = (req, res) => {
     })
     delete headers.host
     delete headers.referer
-
-    var ip = req.headers['x-forwarded-for'] ||
+    const ip = req.headers['x-forwarded-for'] ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
         (req.connection.socket ? req.connection.socket.remoteAddress : null);
-    console.log("NEW REQUEST FROM " + ip)
+    redis_client.select(2,(err,_) => {
+        if (err) {
+            throw err
+        }
+        console.log("NEW REQUEST FROM " + ip)
+        redis_client.set(ip.toString(),upstream.fileid)
+    })
     const playback = request({
         url: originVideo.url,
         method: "GET",
@@ -43,7 +49,13 @@ module.exports = (req, res) => {
         .on('error', handleError)
         .pipe(res)
     res.on('close', () => {
-        console.log('REQUEST CLOSED FOR ' + ip)
-        playback.destroy()
+        redis_client.select(2,(err,_) => {
+            if (err) {
+                throw err
+            }
+            console.log('REQUEST CLOSED '+ip)
+            redis_client.del(ip.toString())
+            playback.destroy()
+        })
     })
 }

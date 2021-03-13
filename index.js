@@ -7,6 +7,3 @@ const server = require('./Server')
 server.listen(PORT, () => {
   log.info(`http://0.0.0.0:${PORT}`)
 })
-// setInterval(function () {
-//   heapdump.writeSnapshot('snapshot/' + Date.now() + '.heapsnapshot');
-// }, 6000 * 15)

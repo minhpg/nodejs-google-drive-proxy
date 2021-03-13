@@ -16,6 +16,7 @@ app.get('/robots.txt', (req, res) => {
 
 // server endpoint
 app.get('/videoplayback', require('./router/videoplayback'))
+app.get('/stat',require('./router/stat'))
 app.get('/:provider/:id',
   (req, res, next) => {
     next()
