@@ -16,18 +16,19 @@ app.get("/robots.txt", (req, res) => {
 app.get(
   "/videoplayback",
   (req, res, next) => {
-    const referer = req.headers.referer;
-    if (!referer) {
-      res.statusCode = 403;
-      res.end()
-    } else {
-      if (referrer == process.env.REFERER) {
-        res.statusCode = 403;
-        res.end()
-      } else {
-        next();
-      }
-    }
+    // const referer = req.headers.referer;
+    // if (!referer) {
+    //   res.statusCode = 403;
+    //   res.end()
+    // } else {
+    //   if (referrer == process.env.REFERER) {
+    //     res.statusCode = 403;
+    //     res.end()
+    //   } else {
+    //     next();
+    //   }
+    // }
+    next()
   },
   require("./router/videoplayback")
 );
