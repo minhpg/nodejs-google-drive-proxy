@@ -73,7 +73,7 @@ module.exports = (req, res) => {
     });
   }
   catch(err){
-    console.log(err)
+    console.log(err.message)
     res.send(JSON.stringify(err))
   }
 };
