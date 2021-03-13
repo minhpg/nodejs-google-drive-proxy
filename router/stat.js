@@ -9,8 +9,10 @@ const Status = (req,res) => {
         redisClient.select(1,() => {
             redisClient.keys('*', (err,data) => {
                 const count = data.length
+                console.log(data)
                 res.end(JSON.stringify({
-                    connections: count
+                    connections: count,
+                    ip: data
                 }))
             })
         })
