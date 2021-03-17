@@ -47,7 +47,9 @@ module.exports = (req, res) => {
         return handleRedisErr(res,err)
       }
       if (data != null) {
-        res.end(JSON.parse(data));
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json; charset=utf8");
+            return res.end(data);
       } else {
         const proxy = getProxy();
         getDriveProxy(req.params.id, proxy)
