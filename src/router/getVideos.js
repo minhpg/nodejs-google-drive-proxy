@@ -23,7 +23,6 @@ const isValidProvider = (provider) => {
 const handleRedisErr = (res,err) => {
     handleError(err);
     res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json; charset=utf8");
     return res.end(JSON.stringify({
       status: 'FAIL',
       message: err.message 
@@ -43,13 +42,11 @@ module.exports = (req, res) => {
     }
     redisClient.get(req.params.id, (err, data) => {
       if(err){
-        console.log(err.message)
         return handleRedisErr(res,err)
       }
       if (data != null) {
         res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json; charset=utf8");
-            return res.end(data);
+        return res.end(data);
       } else {
         const proxy = getProxy();
         getDriveProxy(req.params.id, proxy)
@@ -74,7 +71,6 @@ module.exports = (req, res) => {
               redisClient.setex(req.params.id, 3600, result);
             })
             res.statusCode = 200;
-            res.setHeader("Content-Type", "application/json; charset=utf8");
             return res.end(result);
           })
           .catch((err) => {
