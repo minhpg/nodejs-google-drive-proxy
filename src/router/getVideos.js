@@ -28,12 +28,16 @@ module.exports = (req, res) => {
   }
   redisClient.select(1, (err, _) => {
     if (err) {
-      throw err;
+      handleError(err);
+      res.end({
+        status: 'FAIL',
+        message: err.message
+      });
     }
     redisClient.get(req.params.id, (err, data) => {
       if (err) {
-        console.log(err);
-        res.send({
+        handleError(err);
+        res.end({
           status: 'FAIL',
           message: err.message
         });
