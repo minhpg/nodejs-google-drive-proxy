@@ -29,18 +29,22 @@ module.exports = (req, res) => {
   redisClient.select(1, (err, _) => {
     if (err) {
       handleError(err);
-      res.end({
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json; charset=utf8");
+      res.end(JSON.stringify({
         status: 'FAIL',
-        message: err.message
-      });
+        message: err.message 
+      }));
     }
     redisClient.get(req.params.id, (err, data) => {
       if (err) {
         handleError(err);
-        res.end({
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json; charset=utf8");
+        res.end(JSON.stringify({
           status: 'FAIL',
-          message: err.message
-        });
+          message: err.message 
+        }));
       }
       if (data != null) {
         res.end(JSON.parse(data));
