@@ -33,7 +33,10 @@ module.exports = (req, res) => {
     redisClient.get(req.params.id, (err, data) => {
       if (err) {
         console.log(err);
-        res.status(500).send(err);
+        res.send({
+          status: 'FAIL',
+          message: err.message
+        });
       }
       if (data != null) {
         res.end(JSON.parse(data));
