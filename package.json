@@ -4,8 +4,8 @@
   "description": "google drive get video info proxy",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon src/index.js | pino",
-    "start": "NODE_ENV=production node src/index.js | NODE_ENV=production node report.js",
+    "start": "NODE_ENV=development pm2 start src/index.js -i max --max-memory-restart 100M",
+    "stop": "pm2 kill",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "minhpg",
@@ -17,8 +17,8 @@
     "fast-json-parse": "^1.0.3",
     "finalhandler": "^1.1.2",
     "got": "^11.8.1",
-    "heapdump": "^0.3.15",
     "pino": "^6.10.0",
+    "pm2": "^4.5.5",
     "redis": "^3.0.2",
     "request-promise": "^4.2.6",
     "router": "^1.3.5",
