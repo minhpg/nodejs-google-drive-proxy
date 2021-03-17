@@ -4,6 +4,7 @@ RUN apk add --no-cache make gcc g++
 COPY package.json /src
 COPY proxy.json /src
 RUN npm install
+RUN npm install pm2 -g
 COPY . /src
 EXPOSE 80
-CMD ["npm","start"]
+CMD ["pm2-runtime", "ecosystem.config.js"]

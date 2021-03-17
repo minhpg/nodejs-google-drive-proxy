@@ -4,7 +4,7 @@
   "description": "google drive get video info proxy",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development pm2 start src/index.js -i max --max-memory-restart 100M",
+    "start": "NODE_ENV=development pm2 start src/index.js -i max --max-memory-restart 100M & pm2 log",
     "stop": "pm2 kill",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
