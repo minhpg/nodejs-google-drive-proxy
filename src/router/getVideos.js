@@ -24,7 +24,7 @@ const handleRedisErr = (res,err) => {
     handleError(err);
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json; charset=utf8");
-    res.end(JSON.stringify({
+    return res.end(JSON.stringify({
       status: 'FAIL',
       message: err.message 
     }));
