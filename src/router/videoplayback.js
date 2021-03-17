@@ -10,7 +10,6 @@ module.exports = (req, res) => {
 
   const upstream = JSON.parse(base64.decode(req.query.hash));
   delete req.query.hash;
-  console.log(upstream);
   const originVideo = {
     url: upstream.domain,
     cookie: upstream.cookie,
@@ -32,7 +31,6 @@ module.exports = (req, res) => {
     }
     const time = new Date();
     redis_client.set(ip.toString(), time);
-    console.log("NEW REQUEST FROM " + ip);
   });
   const playback = request({
     url: originVideo.url,
@@ -56,7 +54,6 @@ module.exports = (req, res) => {
         handleError(err);
       }
       redis_client.del(ip.toString());
-      console.log("REQUEST CLOSED " + ip);
       playback.destroy();
     });
   });
