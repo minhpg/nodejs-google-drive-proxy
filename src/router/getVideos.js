@@ -20,6 +20,16 @@ const isValidProvider = (provider) => {
   return Boolean(allowed.indexOf(provider.toLowerCase()) !== -1);
 };
 
+const handleRedisErr = (res,err) => {
+    handleError(err);
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json; charset=utf8");
+    res.end(JSON.stringify({
+      status: 'FAIL',
+      message: err.message 
+    }));
+}
+
 module.exports = (req, res) => {
   res.setHeader("Content-Type", "application/json; charset=utf8");
 
@@ -27,24 +37,14 @@ module.exports = (req, res) => {
     throw new Error("provider invalid");
   }
   redisClient.select(1, (err, _) => {
-    if (err) {
-      handleError(err);
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json; charset=utf8");
-      res.end(JSON.stringify({
-        status: 'FAIL',
-        message: err.message 
-      }));
+    if(err){
+      console.log(err.message)
+      return handleRedisErr(res,err)
     }
     redisClient.get(req.params.id, (err, data) => {
-      if (err) {
-        handleError(err);
-        res.statusCode = 200;
-        res.setHeader("Content-Type", "application/json; charset=utf8");
-        res.end(JSON.stringify({
-          status: 'FAIL',
-          message: err.message 
-        }));
+      if(err){
+        console.log(err.message)
+        return handleRedisErr(res,err)
       }
       if (data != null) {
         res.end(JSON.parse(data));
