@@ -3,7 +3,7 @@ services:
   proxy-worker:
     build: .  
     ports:
-     - "6969:6969"
+     - "80:6969"
     links:
      - redis:redis
     env_file:
