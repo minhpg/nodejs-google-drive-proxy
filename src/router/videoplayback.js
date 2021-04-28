@@ -10,6 +10,7 @@ module.exports = (req, res) => {
     if (!req.query.hash) throw new Error();
 
     const upstream = JSON.parse(base64.decode(req.query.hash));
+    console.log(upstream)
     delete req.query.hash;
     const originVideo = {
       url: upstream.domain,
