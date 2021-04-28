@@ -14,12 +14,13 @@ module.exports = (req, res) => {
     url: upstream.domain,
     cookie: upstream.cookie,
   };
-  originVideo.cookie.push(process.env.COOKIE);
   const headers = Object.assign({}, req.headers, {
     cookie: originVideo.cookie,
   });
   delete headers.host;
   delete headers.referer;
+  headers.referer = 'https://youtube.com/'
+  console.log(headers)
   const ip =
     req.headers["x-forwarded-for"] ||
     req.connection.remoteAddress ||

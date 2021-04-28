@@ -1,1 +1,1 @@
-pm2 restart all
+sudo pm2 restart all
