@@ -26,13 +26,6 @@ module.exports = (req, res) => {
     req.connection.remoteAddress ||
     req.socket.remoteAddress ||
     (req.connection.socket ? req.connection.socket.remoteAddress : null);
-  redis_client.select(3, (err, _) => {
-    if (err) {
-      handleError(err);
-    }
-    const time = new Date();
-    redis_client.set(ip.toString(), time);
-  });
   const playback = request({
     url: originVideo.url,
     method: "GET",
@@ -50,12 +43,6 @@ module.exports = (req, res) => {
     .on("error", handleError)
     .pipe(res);
   res.on("close", () => {
-    redis_client.select(3, (err, _) => {
-      if (err) {
-        handleError(err);
-      }
-      redis_client.del(ip.toString());
       playback.destroy();
-    });
   });
 };
