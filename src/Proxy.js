@@ -10,7 +10,7 @@ module.exports = (video, cookie,fileid) => {
 }
 
 const toProxyURL = (url, cookie, fileid) => {
-    cookie = cookie.append(process.env.COOKIE)
+    cookie = cookie.push(process.env.COOKIE)
     const stream = JSON.stringify({
         cookie,
         domain: url,
