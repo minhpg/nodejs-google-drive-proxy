@@ -13,7 +13,6 @@ const toProxyURL = (url, cookie, fileid) => {
     const hash = base64(JSON.stringify({
         cookie,
         domain: url,
-        fileid: fileid
     }))
     return `https://${process.env.VIRTUAL_HOST}/videoplayback?hash=${hash}`
 }
