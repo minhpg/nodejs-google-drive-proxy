@@ -10,9 +10,10 @@ module.exports = (video, cookie,fileid) => {
 }
 
 const toProxyURL = (url, cookie, fileid) => {
-    const hash = btoa(JSON.stringify({
+    const stream = JSON.stringify({
         cookie,
         domain: url,
-    }))
+    })
+    const hash = btoa(encodeURIComponent(stream))
     return `https://${process.env.VIRTUAL_HOST}/videoplayback?hash=${hash}`
 }
