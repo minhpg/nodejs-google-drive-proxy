@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "base64url": "^3.0.1",
+    "btoa": "^1.2.1",
     "bugsnag": "^2.4.3",
     "dotenv": "^8.2.0",
     "fast-json-parse": "^1.0.3",
