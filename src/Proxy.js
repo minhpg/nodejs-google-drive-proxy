@@ -14,6 +14,6 @@ const toProxyURL = (url, cookie, fileid) => {
         cookie,
         domain: url,
     })
-    const hash = encodeURIComponent(btoa(encodeURIComponent(stream)))
+    const hash = encodeURIComponent(base64(encodeURIComponent(stream)))
     return `https://${process.env.VIRTUAL_HOST}/videoplayback?hash=${hash}`
 }
