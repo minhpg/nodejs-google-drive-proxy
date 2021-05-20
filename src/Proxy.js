@@ -1,7 +1,7 @@
 'use strict'
 
 const base64 = require('base64url')
-
+const btoa = require('btoa');
 module.exports = (video, cookie,fileid) => {
     return Object.assign({}, video, {
         provider: 'proxy',
@@ -10,7 +10,7 @@ module.exports = (video, cookie,fileid) => {
 }
 
 const toProxyURL = (url, cookie, fileid) => {
-    const hash = base64.encode(JSON.stringify({
+    const hash = btoa(JSON.stringify({
         cookie,
         domain: url,
     }))
