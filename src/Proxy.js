@@ -10,12 +10,10 @@ module.exports = (video, cookie,fileid) => {
 }
 
 const toProxyURL = (url, cookie, fileid) => {
-    cookie.push(process.env.COOKIE)
-    const stream = JSON.stringify({
+    const hash = base64(JSON.stringify({
         cookie,
         domain: url,
-        fileid : fileid
-    })
-    const hash = base64(stream)
+        fileid: fileid
+    }))
     return `https://${process.env.VIRTUAL_HOST}/videoplayback?hash=${hash}`
 }
